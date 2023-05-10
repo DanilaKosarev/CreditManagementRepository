@@ -1,0 +1,35 @@
+<div *ngIf="creditOffer">
+    <h2>Details</h2>
+    <div><span>id: </span>{{creditOffer.id}}</div>
+    <div>
+      <label  for="creditOffer-limit">Credit limit: </label>
+      <input [disabled]="!(credits.length===0)" id="creditOffer-limit" [(ngModel)]="creditOffer.creditLimit" placeholder="Credit offer limit">
+
+      <label  for="creditOffer-percent">Percent: </label>
+      <input [disabled]="!(credits.length===0)"  id="creditOffer-percent" [(ngModel)]="creditOffer.percent" placeholder="Percent">
+        <ul class="credits">
+          <li *ngFor="let credit of credits">
+            <button [class.selected]="credit === selectedCredit" type="button" (click)="onSelect(credit)">
+              <span>amount: {{credit.amount}} Month quantity: {{credit.monthQuantity}}</span>
+            </button>
+          </li>
+        </ul>
+        <div *ngIf="selectedCredit">
+          <h2>Credit details:</h2>
+          <div>id: {{selectedCredit.id}}</div>
+          <br/>
+          <div>Payments: </div>
+          <br/>
+          <div>
+              <li *ngFor="let payment of selectedCredit.payments">
+                  <span>id: {{payment.id}} Date: {{payment.dateOfPayment}} Total: {{payment.overallAmount}} Body: {{payment.creditBodyAmount}} Percent: {{payment.percentAmount}}</span>
+              </li>
+          </div>
+      </div>
+    </div>
+    <span *ngIf="isBelowZero" style="color: red">Credit limit and percent should be greater than zero</span>
+    <span *ngIf="isNotEnoughParameters" style="color: red">Credit limit and percent values should not be empty</span>
+    <br/>
+    <button *ngIf="credits.length===0" type="button" (click)="save()">save</button>
+</div>
+<button type="button" (click)="goBack()">go back</button>

@@ -1,0 +1,31 @@
+<h2>Clients</h2>
+<div>
+    <label for="new-client-fullName">Client full name: </label>
+    <input id="new-client-fullName" #clientFullName />
+
+    <label for="new-client-email">Client email: </label>
+    <input id="new-client-email" #clientEmail />
+
+    <label for="new-client-passportNumber">Client passport number: </label>
+    <input id="new-client-passportNumber" type="number" #clientPassportNumber />
+
+    <br/>
+    <span *ngIf="isEmailOccupied" style="color: red">This email is already taken</span>
+    <br/>
+    <span *ngIf="isNotEnoughParameters" style="color: red">Full name, email and passport number values should not be empty</span>
+    <br/>
+    <span *ngIf="isPassportNumberOccupied" style="color: red">This passport number is already taken</span>
+    <br/>
+  
+    <button type="button" class="add-button" (click)="add(clientFullName.value, clientEmail.value, clientPassportNumber.valueAsNumber); clientFullName.value='';clientEmail.value='';clientPassportNumber.value=''">
+      Add client
+    </button>
+  </div>
+<ul class="clients">
+    <li *ngFor="let client of clients">
+        <a routerLink="/clients/{{client.id}}">
+            <span class="badge">{{client.id}}</span>{{client.fullName}}
+        </a>
+        <button type="button" class="delete" title="delete client"(click)="delete(client)">x</button>
+    </li>
+</ul>

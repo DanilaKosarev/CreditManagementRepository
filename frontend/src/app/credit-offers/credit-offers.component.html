@@ -1,0 +1,24 @@
+<h2>Credit offers</h2>
+<div>
+    <label for="new-credit-offer-creditLimit">Credit offer limit: </label>
+    <input id="new-credit-offer-creditLimit" type="number" #creditOfferLimit />
+
+    <label for="new-credit-offer-percent">Credit offer percent: </label>
+    <input id="new-credit-offer-percent" type="number" #creditOfferPercent />
+  
+    <span *ngIf="isBelowZero" style="color: red">Credit limit and percent should be greater than zero</span>
+    <span *ngIf="isNotEnoughParameters" style="color: red">Credit limit and percent values should not be empty</span>
+    <br/>
+
+    <button type="button" class="add-button" (click)="add(creditOfferLimit.valueAsNumber, creditOfferPercent.valueAsNumber); creditOfferLimit.value='';creditOfferPercent.value=''">
+      Add credit offer
+    </button>
+  </div>
+<ul class="creditOffers">
+    <li *ngFor="let creditOffer of creditOffers">
+        <a routerLink="/credit-offers/{{creditOffer.id}}">
+            <span class="badge">{{creditOffer.id}}</span>{{"Limit: "+creditOffer.creditLimit}} {{" ("+creditOffer.percent+"%)"}}
+        </a>
+        <button type="button" class="delete" title="delete creditOffer"(click)="delete(creditOffer)">x</button>
+    </li>
+</ul>

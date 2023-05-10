@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+<nav *ngIf="isLoggedIn()">
+    <a routerLink="/clients">Clients</a>
+    <a routerLink="/credit-offers">Credit offers</a>
+    <a routerLink="/logout">Logout</a>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,79 @@
+<div *ngIf="client">
+    <h2>{{client.fullName | uppercase}} Details</h2>
+    <div><span>id: </span>{{client.id}}</div>
+    <br/>
+    <div>
+        <label for="client-fullName">Client name: </label>
+        <input id="client-fullName" [(ngModel)]="client.fullName" placeholder="Client full name">
+  
+        <label for="client-email">Client email: </label>
+        <input id="client-email" [(ngModel)]="client.email" placeholder="Client email">
+        
+        <label for="client-passportNumber">Client passport number: </label>
+        <input id="client-passportNumber" type="number" [(ngModel)]="client.passportNumber" placeholder="Client passport number">
+        <br/>
+        <span>Credits: </span>
+        <br/>
+        <ul class="credits">
+          <li *ngFor="let credit of credits">
+              <button [class.selected]="credit === selectedCredit" type="button" (click)="onSelect(credit)">
+                <span>amount: {{credit.amount}} Month quantity: {{credit.monthQuantity}}</span>
+              </button>
+              <button type="button" class="delete" title="delete credit"(click)="deleteCredit(credit)">x</button>
+          </li>
+        </ul>
+        <div *ngIf="selectedCredit">
+            <h2>Credit details:</h2>
+            <div>id: {{selectedCredit.id}}</div>
+            <br/>
+            <div>Payments: </div>
+            <br/>
+            <div>
+                <li *ngFor="let payment of selectedCredit.payments">
+                    <span>id: {{payment.id}} Date: {{payment.dateOfPayment}} Total: {{payment.overallAmount}} Body: {{payment.creditBodyAmount}} Percent: {{payment.percentAmount}}</span>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>Select credit offer: </p>
+        <mat-form-field appearance="fill">
+            <mat-label>Credit offer</mat-label>
+            <mat-select [(ngModel)]="selectedCreditOffer" name="offer">
+                <mat-option *ngFor="let creditOffer of creditOffers" [value]="creditOffer">
+                    {{"Limit: "+creditOffer.creditLimit + " (" + creditOffer.percent+"%)"}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!--<p *ngIf="selectedCreditOffer">Selected offer: {{selectedCreditOffer.id}}</p>-->
+
+        <br/>
+
+        <label for="new-credit-amount">Credit amount: </label>
+        <input id="new-credit-amount" type="number" #creditAmount>
+  
+        <label for="new-credit-monthQuantity">Credit month quantity: </label>
+        <input id="new-credit-monthQuantity" type="number" #creditMonthQuantity>
+        
+        <br/>
+        <span *ngIf="isBelowZero" style="color: red">Credit amount and month quantity should be greater than zero</span>
+        <span *ngIf="isNotEnoughCreditParameters" style="color: red">Credit amount, credit offer and month quantity values should not be empty</span>
+        <span *ngIf="isExceedLimit" style="color: red">Credit limit exceeded</span>
+        <br/>
+
+        <button type="button" class="add-button" (click)="addCredit(creditAmount.valueAsNumber, creditMonthQuantity.valueAsNumber); creditAmount.value='';creditMonthQuantity.value=''">
+            Add credit
+        </button>
+
+    </div>
+    <br/>
+    <span *ngIf="isEmailOccupied" style="color: red">This email is already taken</span>
+    <br/>
+    <span *ngIf="isNotEnoughParameters" style="color: red">Full name, email and passport number values should not be empty</span>
+    <br/>
+    <span *ngIf="isPassportNumberOccupied" style="color: red">This passport number is already taken</span>
+    <br/>
+    <button type="button" (click)="save()">save</button>
+</div>
+<button type="button" (click)="goBack()">go back</button>

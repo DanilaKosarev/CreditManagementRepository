@@ -1,0 +1,88 @@
+/* GroupsDetailComponent's private CSS styles */
+label {
+    color: #435960;
+    font-weight: bold;
+  }
+  input {
+    display: block;
+    width: 25%;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    /*font-size: 1em;
+    padding: .5rem;*/
+  }
+  button {
+    margin-top: 20px;
+    margin-right: .5rem;
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: auto;
+  }
+  
+  /*.credits {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }*/
+  
+  
+  .credits li {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .credits li:hover {
+    left: .1em;
+  }
+
+  .credits button:hover {
+    color: #2c3a41;
+    background-color: #e6e6e6;
+    left: .1em;
+  }
+  
+  .credits button:active {
+    background-color: #525252;
+    color: #fafafa;
+  }
+  
+  .credits button.selected {
+    background-color: black;
+    color: white;
+  }
+  
+  .credits button.selected:hover {
+    background-color: #505050;
+    color: white;
+  }
+  
+  .credits button.selected:active {
+    background-color: black;
+    color: white;
+  }
+  
+  .credits .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #405061;
+    line-height: 1em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .credits .name {
+    align-self: center;
+  }

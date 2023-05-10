@@ -1,0 +1,20 @@
+<form name="form" (ngSubmit)="login()" #f="ngForm">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+    </div>
+    <br/>
+    <span *ngIf="isBadCredentials" style="color: red">Bad credentials</span>
+    <div>
+        <button>Login</button>
+    </div>
+    <div>
+        <a routerLink="/registration">
+            <span>Registration</span>
+        </a>
+    </div>
+</form>

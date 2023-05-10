@@ -1,0 +1,18 @@
+<form name="form" (ngSubmit)="regist()" #f="ngForm">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+    </div>
+    <br/>
+    <span *ngIf="isNotEnoughParameters" style="color: red">Username and password values should not be empty</span>
+    <br/>
+    <span *ngIf="isInvalid" style="color: red">This username is already taken</span>
+    <div>
+        <button>Regist</button>
+    </div>
+</form>
+<button type="button" (click)="goBack()">go back</button>
